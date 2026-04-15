@@ -27,12 +27,6 @@ export function SiteFooter() {
           >
             {EMAIL_ALT}
           </a>
-          <Link
-            className="underline decoration-border underline-offset-4 hover:text-foreground"
-            href="/cv"
-          >
-            CV
-          </Link>
         </p>
       </div>
     </footer>
