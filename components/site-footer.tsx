@@ -29,9 +29,9 @@ export function SiteFooter() {
           </a>
           <Link
             className="underline decoration-border underline-offset-4 hover:text-foreground"
-            href="/andres-cardenas-cv-en.pdf"
+            href="/cv"
           >
-            CV (PDF)
+            CV
           </Link>
         </p>
       </div>

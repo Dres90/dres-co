@@ -1,7 +1,7 @@
 export const SITE_NAME = "Andres Cardenas";
 
 export const SITE_DESCRIPTION =
-  "Full stack engineer with 10+ years of experience. Tech lead and software architecture across client platforms, research tooling, and ecommerce.";
+  "Full-stack engineer in Barcelona. Web stacks, occasional research tooling and ecommerce backends.";
 
 export const LINKEDIN_URL = "https://www.linkedin.com/in/dres90/";
 

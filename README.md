@@ -27,8 +27,8 @@ and webhook secrets when you use `/api/weight`.
 
 ## Content
 
-- Marketing copy and portfolio stubs live under [`content/`](content/).
-- Public CV PDF: [`public/andres-cardenas-cv-en.pdf`](public/andres-cardenas-cv-en.pdf).
+- Copy and portfolio stubs live under [`content/`](content/).
+- CV is rendered at `/cv` from the app (no separate public PDF download).
 
 ## Database
 

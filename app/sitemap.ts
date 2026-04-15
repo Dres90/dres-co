@@ -6,7 +6,7 @@ import { getSiteUrl, showLabsNav } from "@/lib/site";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl();
   const portfolio = await getPortfolioSlugs();
-  const staticRoutes = ["", "/about", "/cv", "/portfolio"].map((path) => ({
+  const staticRoutes = ["", "/cv", "/portfolio"].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),
   }));

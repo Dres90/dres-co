@@ -7,7 +7,6 @@ import { showLabsNav } from "@/lib/site";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/cv", label: "CV" },
   { href: "/portfolio", label: "Portfolio" },
 ] as const;
