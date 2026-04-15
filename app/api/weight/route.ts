@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getSupabaseAdmin } from "@/lib/supabase/admin";
+import { createAdminClient } from "@/utils/supabase/admin";
 
 /**
  * Siri / Shortcuts example: POST with header
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "note must be a string" }, { status: 400 });
   }
 
-  const supabase = getSupabaseAdmin();
+  const supabase = createAdminClient();
   if (!supabase) {
     return NextResponse.json(
       { error: "Server misconfigured: Supabase env missing" },

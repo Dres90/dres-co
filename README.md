@@ -34,3 +34,9 @@ and webhook secrets when you use `/api/weight`.
 
 SQL for the weight log table is in
 [`supabase/migrations/001_weight_entries.sql`](supabase/migrations/001_weight_entries.sql).
+
+## License
+
+The code in this repository is licensed under the MIT License.
+
+Unless otherwise noted, all written content, images, branding, and other non-code assets are copyright Andres Cardenas and are not licensed for reuse.
