@@ -7,7 +7,7 @@ import { createAdminClient } from "@/utils/supabase/admin";
  *   Authorization: Bearer <WEIGHT_WEBHOOK_SECRET>
  * JSON body: { "kg": 72.4, "note": "morning" }
  *
- * Requires NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, WEIGHT_WEBHOOK_SECRET.
+ * Requires SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, WEIGHT_WEBHOOK_SECRET.
  */
 export async function POST(request: Request) {
   const secret = process.env.WEIGHT_WEBHOOK_SECRET;
