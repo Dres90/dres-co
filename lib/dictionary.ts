@@ -7,8 +7,8 @@ type DictionaryRow = {
   value: string | null;
 };
 
-function isBlank(value: string | null | undefined): boolean {
-  return typeof value !== "string" || value.trim().length === 0;
+function hasDictionaryValue(value: string | null | undefined): value is string {
+  return typeof value === "string" && value.trim().length > 0;
 }
 
 export async function getDictionaryValue(key: string): Promise<string> {
@@ -41,9 +41,9 @@ export async function getDictionaryValues(
   const valuesByKey = new Map(rows.map((row) => [row.key, row.value]));
 
   return Object.fromEntries(
-    uniqueKeys.map((key) => {
+    uniqueKeys.map((key): [string, string] => {
       const value = valuesByKey.get(key);
-      return [key, isBlank(value) ? key : value];
+      return [key, hasDictionaryValue(value) ? value : key];
     }),
   );
 }
