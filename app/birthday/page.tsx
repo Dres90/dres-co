@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import {
+  getDictionaryValue,
+  getDictionaryValues,
+  interpolateDictionaryValue,
+} from "@/lib/dictionary";
 import { createAdminClient } from "@/utils/supabase/admin";
 
 const BUCKET = "dres-co-public";
@@ -8,10 +13,12 @@ const BUCKET = "dres-co-public";
 /** Always read fresh data from Supabase (imports can happen after deploy). */
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Birthday messages",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: await getDictionaryValue("birthday.meta.title"),
+    robots: { index: false, follow: false },
+  };
+}
 
 type BirthdayMessageRow = {
   id: string;
@@ -23,16 +30,24 @@ type BirthdayMessageRow = {
 };
 
 export default async function BirthdayPage() {
+  const dictionary = await getDictionaryValues([
+    "birthday.page.title",
+    "birthday.state.unavailable_missing_env",
+    "birthday.state.load_error",
+    "birthday.hero.kicker",
+    "birthday.summary.empty",
+    "birthday.summary.count",
+  ]);
+
   const supabase = createAdminClient();
   if (!supabase) {
     return (
       <div className="mx-auto max-w-lg space-y-4 text-center">
         <h1 className="text-2xl font-bold tracking-tight text-rose-900">
-          Birthday messages
+          {dictionary["birthday.page.title"]}
         </h1>
         <p className="rounded-2xl bg-white/70 px-6 py-4 text-stone-600 shadow-md ring-1 ring-amber-100/80">
-          This page is not available yet (Supabase environment variables are missing on
-          the server).
+          {dictionary["birthday.state.unavailable_missing_env"]}
         </p>
       </div>
     );
@@ -48,10 +63,10 @@ export default async function BirthdayPage() {
     return (
       <div className="mx-auto max-w-lg space-y-4 text-center">
         <h1 className="text-2xl font-bold tracking-tight text-rose-900">
-          Birthday messages
+          {dictionary["birthday.page.title"]}
         </h1>
         <p className="rounded-2xl bg-white/70 px-6 py-4 text-stone-600 shadow-md ring-1 ring-amber-100/80">
-          Could not load messages. Check the database migration and try again.
+          {dictionary["birthday.state.load_error"]}
         </p>
       </div>
     );
@@ -62,14 +77,18 @@ export default async function BirthdayPage() {
   return (
     <div className="mx-auto w-full max-w-6xl flex-1">
       <header className="mb-10 text-center sm:mb-14">
-        <p className="mb-2 text-lg text-rose-600/90 sm:text-xl">With love ·</p>
+        <p className="mb-2 text-lg text-rose-600/90 sm:text-xl">
+          {dictionary["birthday.hero.kicker"]}
+        </p>
         <h1 className="bg-gradient-to-r from-rose-600 via-amber-600 to-sky-600 bg-clip-text text-3xl font-extrabold tracking-tight text-transparent sm:text-4xl md:text-5xl">
-          Birthday messages
+          {dictionary["birthday.page.title"]}
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-base text-stone-600 sm:text-lg">
           {messages.length === 0
-            ? "Messages will appear here once they are imported."
-            : `${messages.length} warm wishes from people who adore you`}
+            ? dictionary["birthday.summary.empty"]
+            : interpolateDictionaryValue(dictionary["birthday.summary.count"], {
+                count: messages.length,
+              })}
         </p>
         <div className="mt-6 flex justify-center gap-2 text-2xl" aria-hidden>
           <span
