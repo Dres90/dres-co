@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Local Strapi export for one-time birthday migration (see README)
 /data/birthday-strapi-export.json
+
+# Supabase
+supabase/.temp

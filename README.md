@@ -32,8 +32,28 @@ and webhook secrets when you use `/api/weight`.
 
 ## Database
 
-SQL for the weight log table is in
-[`supabase/migrations/001_weight_entries.sql`](supabase/migrations/001_weight_entries.sql).
+Schema changes live as SQL files in [`supabase/migrations/`](supabase/migrations/).
+The production database is **hosted Supabase**; apply migrations from this repo with the
+[Supabase CLI](https://supabase.com/docs/guides/cli) (installed as a dev dependency).
+
+**One-time setup**
+
+1. Log in: `npx supabase login`
+2. Link this directory to your Supabase project (project ref is in the dashboard under
+   **Project Settings → General**):
+
+   ```bash
+   npx supabase link --project-ref <project-ref>
+   ```
+
+**Apply migrations** (pushes any new files under `supabase/migrations/` to the linked project):
+
+```bash
+npx supabase db push
+```
+
+Use this after adding or changing migration SQL locally and before relying on those changes
+in production.
 
 ## License
 
